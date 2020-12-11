@@ -1,5 +1,5 @@
 script_name('MathPro')
-script_version('0.3')
+script_version('0.4')
 script_author('TMoore')
 
 require "lib.moonloader"
@@ -37,10 +37,8 @@ local Vvodchisel = imgui.ImBool(false)
 local result = imgui.ImBool(false)
 
 Version_Script = [[
-Ver 0.3
-1.Автообновление
-Ver 0.2
-1.Логика
+Version 0.4
+1.Релиз скрипта
 ]]
 
 function infinity()
@@ -69,7 +67,7 @@ function imgui.OnDrawFrame()
         imgui.SetNextWindowSize(imgui.ImVec2(700, 240), imgui.Cond.FirstUseEver)
         imgui.SetNextWindowPos(imgui.ImVec2(X / 2, Y / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
             imgui.Begin(u8'[Calculator Ver: '..thisScript().version.. u8'] Введите числа для подсчета.', Vvodchisel, imgui.WindowFlags.NoResize)
-                imgui.BeginChild('Buttons', imgui.ImVec2(200, 205), true)
+                imgui.BeginChild('Buttons', imgui.ImVec2(150, 205), true)
                     if imgui.Button(u8'Калькулятор', imgui.ImVec2(-1, 30)) then menu = 0 end
                     if imgui.Button(u8'Автообновление', imgui.ImVec2(-1, 30)) then menu = 1 end
                     -- if imgui.Button(u8'Настройки', imgui.ImVec2(-1, 30)) then menu = 2 end
@@ -77,7 +75,7 @@ function imgui.OnDrawFrame()
                 imgui.SameLine()
                 if menu == 0 then
                     if shet == 0 then
-                        imgui.BeginChild('Calc', imgui.ImVec2(476, 65), true)
+                        imgui.BeginChild('Calc', imgui.ImVec2(526, 65), true)
                             imgui.PushItemWidth(120)
                             imgui.InputText(u8'##1', num1)
                             imgui.PopItemWidth()
@@ -109,7 +107,7 @@ function imgui.OnDrawFrame()
                             end
                         imgui.EndChild()
                         elseif shet == 1 then
-                        imgui.BeginChild('Calc', imgui.ImVec2(476, 65), true)
+                        imgui.BeginChild('Calc', imgui.ImVec2(526, 65), true)
                             imgui.PushItemWidth(120)
                             imgui.InputText(u8'##3', num1)
                             imgui.PopItemWidth()
@@ -134,58 +132,62 @@ function imgui.OnDrawFrame()
                                 end
                         imgui.EndChild()
                     end
-                        imgui.SetCursorPos(imgui.ImVec2(216, 97))
-                        imgui.BeginChild('Virazh', imgui.ImVec2(476, 136), true)
-                            imgui.PushItemWidth(100)
+                        imgui.SetCursorPos(imgui.ImVec2(166, 97))
+                        imgui.BeginChild('Virazh', imgui.ImVec2(526, 136), true)
+                            imgui.PushItemWidth(95)
                             imgui.InputText('##5', num_1)
                             imgui.PopItemWidth()
                             imgui.SameLine()
-                            imgui.PushItemWidth(60)
+                            imgui.PushItemWidth(35)
+                            imgui.SetCursorPos(imgui.ImVec2(106, 8))
                             imgui.Combo(' ', Combo_num1, Num_1)
                             imgui.PopItemWidth()
                             imgui.SameLine()
-                            imgui.PushItemWidth(100)
-                            imgui.SetCursorPos(imgui.ImVec2(185, 8))
+                            imgui.PushItemWidth(95)
+                            imgui.SetCursorPos(imgui.ImVec2(144, 8))
                             imgui.InputText('##6', num_2)
                             imgui.PopItemWidth()
                             imgui.SameLine()
                             if dopinput == 1 then
-                                imgui.PushItemWidth(60)
-                                imgui.Combo('   ', Combo_two, Num_2)
+                                imgui.PushItemWidth(35)
+                                imgui.SetCursorPos(imgui.ImVec2(242, 8))
+                                imgui.Combo('  ', Combo_two, Num_2)
                                 imgui.PopItemWidth()
                                 imgui.SameLine()
-                                imgui.PushItemWidth(100)
-                                imgui.SetCursorPos(imgui.ImVec2(361, 8))
+                                imgui.PushItemWidth(95)
+                                imgui.SetCursorPos(imgui.ImVec2(280, 8))
                                 imgui.InputText('##7', num_3)
                                 imgui.PopItemWidth()
                             elseif dopinput == 2 then
-                                imgui.PushItemWidth(60)
+                                imgui.PushItemWidth(35)
+                                imgui.SetCursorPos(imgui.ImVec2(242, 8))
                                 imgui.Combo('   ', Combo_two, Numm_2)
                                 imgui.PopItemWidth()
                                 imgui.SameLine()
-                                imgui.PushItemWidth(100)
-                                imgui.SetCursorPos(imgui.ImVec2(361, 8))
+                                imgui.PushItemWidth(95)
+                                imgui.SetCursorPos(imgui.ImVec2(280, 8))
                                 imgui.InputText('##8', num_3)
                                 imgui.PopItemWidth()
-                                imgui.SetCursorPos(imgui.ImVec2(8, 32))
-                                imgui.PushItemWidth(60)
-                                imgui.Combo('  ', Combo_num3, Num_33)
+                                imgui.PushItemWidth(35)
+                                imgui.SetCursorPos(imgui.ImVec2(378, 8))
+                                imgui.Combo('    ', Combo_num3, Num_33)
                                 imgui.PopItemWidth()
                                 imgui.SameLine()
-                                imgui.PushItemWidth(100)
-                                imgui.SetCursorPos(imgui.ImVec2(73, 33))
+                                imgui.PushItemWidth(95)
+                                imgui.SetCursorPos(imgui.ImVec2(416, 8))
                                 imgui.InputText('##9', num_4)
                                 imgui.PopItemWidth()
-                                imgui.SameLine()
                             end
                                 if dopinput ~= 2 then
+                                    imgui.SameLine()
                                     if imgui.Button('+', imgui.ImVec2(35, 20)) then
                                         dopinput = dopinput + 1
                                     end
                                 end
-                            imgui.SameLine()
-                            imgui.Text(u8'=  '..num_result)
-                            if imgui.Button(u8'Решить', imgui.ImVec2(226, 25)) then
+                            imgui.SetCursorPos(imgui.ImVec2(8, 35))
+                            imgui.Text(u8'Ответ:  '..num_result)
+                            imgui.SetCursorPos(imgui.ImVec2(8, 57))
+                            if imgui.Button(u8'Решить', imgui.ImVec2(250, 30)) then
                                 if dopinput == 0 then
                                     if Combo_num1.v == 0 then -- Результат без добавления input
                                         num_result = num_1.v - num_2.v
@@ -407,7 +409,8 @@ function imgui.OnDrawFrame()
                                 end
                             end
                             imgui.SameLine()
-                            if imgui.Button(u8'Сбросить значения', imgui.ImVec2(226, 25)) then
+                            imgui.SetCursorPos(imgui.ImVec2(265, 57))
+                            if imgui.Button(u8'Сбросить значения', imgui.ImVec2(250, 30)) then
                                 num_1.v = ''
                                     num_2.v = ''
                                         num_3.v = ''
@@ -425,12 +428,8 @@ function imgui.OnDrawFrame()
                     imgui.BeginChild('AutoUpdate', imgui.ImVec2(476, 205), true)
                         imgui.CenterTextColoredRGB('Здесь Вы можете проверить скрипт на актуальную версию.')
                         if imgui.Button(u8'Проверка обновления', imgui.ImVec2(-1, 25)) then
-                            if update == true then
-                                sampAddChatMessage('[Calculator] Обновление было найдено! Начинается скачивание!')
-                                    update()
-                            elseif update == false then
-                                sampAddChatMessage('[Calculator] Обновление не требуется! Установлена самая последняя версия.')
-                            end
+                            sampAddChatMessage('[Calculator] Обновление было найдено! Начинается скачивание!', -1)
+                                update()
                         end
                         imgui.Separator()
                         imgui.InputTextMultiline('##VersionBlog', Version_change, imgui.ImVec2(460, 140), imgui.InputTextFlags.ReadOnly)
@@ -565,21 +564,20 @@ function imgui.CenterTextColoredRGB(text)
 end
 
 function goupdate()
-    print(('[Calculator] Обнаружено обновление. AutoReload может конфликтовать. Обновляюсь...'), color)
-    print(('[Calculator] Текущая версия: '..thisScript().version..". Новая версия: "..version), color)
-    wait(300)
-    downloadUrlToFile(updatelink, thisScript().path, function(id3, status1, p13, p23) -- качает ваш файлик с latest version
-        if status1 == dlstatus.STATUS_ENDDOWNLOADDATA then
-            print(('[Calculator] Обновление завершено!'), color)
-                print(('[Calculator] Перезапускаю скрипт!'), color)
-                    thisScript():reload()
-        end
-    end)
+    print(('[Calculator] Обнаружено обновление. AutoReload может конфликтовать. Обновляюсь...'), -1)
+        print(('[Calculator] Текущая версия: '..thisScript().version..". Новая версия: "..version), -1)
+            wait(300)
+                downloadUrlToFile(updatelink, thisScript().path, function(id3, status1, p13, p23) -- качает ваш файлик с latest version
+                    if status1 == dlstatus.STATUS_ENDDOWNLOADDATA then
+                        print(('[Calculator] Обновление завершено, перезапускаю скрипт!'), -1)
+                            thisScript():reload()
+                    end
+                end)
 end
 
 function update()
     local fpath = os.getenv('TEMP') .. '\\New_version.json' -- куда будет качаться наш файлик для сравнения версии
-    downloadUrlToFile('', fpath, function(id, status, p1, p2) -- ссылку на ваш гитхаб где есть строчки которые я ввёл в теме или любой другой сайт
+    downloadUrlToFile('https://api.jsonbin.io/b/5fd3ab1efbb23c2e36a580ee', fpath, function(id, status, p1, p2) -- ссылку на ваш гитхаб где есть строчки которые я ввёл в теме или любой другой сайт
         if status == dlstatus.STATUS_ENDDOWNLOADDATA then
         local f = io.open(fpath, 'r') -- открывает файл
             if f then
@@ -591,8 +589,7 @@ function update()
                             lua_thread.create(goupdate) -- апдейт
                         else -- если меньше, то
                             update = false -- не даём обновиться 
-                                print('Ваша версия: '..thisScript().version)
-                                    print('Обновление не требуется')
+                                print('Ваша версия: '..thisScript().version..'. Обновление не требуется!')
                         end
                     end
             end
