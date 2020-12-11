@@ -52,7 +52,7 @@ function main()
 
     sampRegisterChatCommand('calcp', function() Vvodchisel.v = not Vvodchisel.v imgui.Process = Vvodchisel.v end)
 
-    sampAddChatMessage('[Math] Скрипт успешно загружен! Автор: TMoore', -1)
+        sampAddChatMessage('{1F6DDD}[Math]{FFFFFF} Скрипт успешно загружен! Автор: {1F6DDD}TMoore{FFFFFF}', -1)
 
     lua_thread.create(infinity)
 end
@@ -425,10 +425,10 @@ function imgui.OnDrawFrame()
                 end
                 imgui.SameLine()
                 if menu == 1 then
-                    imgui.BeginChild('AutoUpdate', imgui.ImVec2(476, 205), true)
+                    imgui.BeginChild('AutoUpdate', imgui.ImVec2(526, 205), true)
                         imgui.CenterTextColoredRGB('Здесь Вы можете проверить скрипт на актуальную версию.')
                         if imgui.Button(u8'Проверка обновления', imgui.ImVec2(-1, 25)) then
-                            sampAddChatMessage('[Calculator] Обновление было найдено! Начинается скачивание!', -1)
+                            sampAddChatMessage('[Calculator] Производится поиск обновления...', -1)
                                 update()
                         end
                         imgui.Separator()
@@ -569,7 +569,7 @@ function goupdate()
             wait(300)
                 downloadUrlToFile(updatelink, thisScript().path, function(id3, status1, p13, p23) -- качает ваш файлик с latest version
                     if status1 == dlstatus.STATUS_ENDDOWNLOADDATA then
-                        print(('[Calculator] Обновление завершено, перезапускаю скрипт!'), -1)
+                        sampAddChatMessage(('[Calculator] Обновление завершено, перезапускаю скрипт!'), -1)
                             thisScript():reload()
                     end
                 end)
@@ -577,7 +577,7 @@ end
 
 function update()
     local fpath = os.getenv('TEMP') .. '\\New_version.json' -- куда будет качаться наш файлик для сравнения версии
-    downloadUrlToFile('https://api.jsonbin.io/b/5fd3ab1efbb23c2e36a580ee', fpath, function(id, status, p1, p2) -- ссылку на ваш гитхаб где есть строчки которые я ввёл в теме или любой другой сайт
+    downloadUrlToFile('https://api.jsonbin.io/b/5fd3f892fbb23c2e36a59b6c', fpath, function(id, status, p1, p2) -- ссылку на ваш гитхаб где есть строчки которые я ввёл в теме или любой другой сайт
         if status == dlstatus.STATUS_ENDDOWNLOADDATA then
         local f = io.open(fpath, 'r') -- открывает файл
             if f then
@@ -589,7 +589,7 @@ function update()
                             lua_thread.create(goupdate) -- апдейт
                         else -- если меньше, то
                             update = false -- не даём обновиться 
-                                print('Ваша версия: '..thisScript().version..'. Обновление не требуется!')
+                                sampAddChatMessage('Ваша версия: {1F6DDD}'..thisScript().version..'{FFFFFF}. Обновление не требуется!', -1)
                         end
                     end
             end
